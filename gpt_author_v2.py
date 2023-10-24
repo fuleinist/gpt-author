@@ -476,6 +476,8 @@ def write_fantasy_novel(prompt, num_chapters, writing_style, claude_true=False):
 
     return novel, title, chapters, chapter_titles
 
+from epub_to_aw3z import convert_epub_to_azw3
+
 def create_fantasy_novel(prompt, num_chapters, writing_style, extra_guideline, plot_design, world_building, character_depth):
   if(extra_guideline):
       writing_style = f"{writing_style}\nExtra Guideline: {extra_guideline}"
@@ -500,6 +502,7 @@ def create_fantasy_novel(prompt, num_chapters, writing_style, extra_guideline, p
   # Create the EPUB file
   create_epub(title, 'GPT Author', chapter_titles, 'book-cover.png')
   print(f"Book: {title} has created")
+  convert_epub_to_azw3(f'content/{title}.epub', f'content/{title}.azw3')
   return title
 
 def create_fantasy_novel_from_template(template_path):
